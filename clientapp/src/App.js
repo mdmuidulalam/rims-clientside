@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { BrowserRouter,  Switch, Route } from 'react-router-dom';
 
-import { Dashboard } from './components/dashboard/Dashboard';
+import { Home } from './components/home/Home';
 import { LandingPage } from './components/landingPage/LandingPage';
 
 class App extends Component {
   render() {
     return (
-      <Switch>
-        <Route exact path='/' component={LandingPage}/>
-        <Route path='/dashboard' component={Dashboard}/>
-      </Switch>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path='/' component={LandingPage}/>
+          <Route exact path='/home' component={Home}/>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
