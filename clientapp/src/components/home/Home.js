@@ -1,11 +1,63 @@
 import React, { Component } from 'react';
-import './Home.less';
+import Styles from './Home.less';
 
 export class Home extends Component {
   render() {
     return (
       <div>
-          Home
+        {/* sidebar content */}
+        <div className={Styles.sidebar}>
+          <div className={Styles.sidebarheader}>
+            <div className={Styles.headertext + " " + Styles.sidebarheadertext}>BASE</div>
+          </div>
+          <div className={Styles.userpanel}>
+            <div id="name">
+              Md Muidul Alam
+            </div>
+            <div>
+              <i className="fa fa-circle text-success"></i> Online
+            </div>
+          </div>
+          <ul className={Styles.menu}>
+            <li className={Styles.menubar}>
+              MENU NAVIGATION
+            </li>
+            <li className={Styles.menulineitem}>
+              <i class="fas fa-shopping-cart"></i> Sales
+            </li>
+            <li className={Styles.menulineitem}>
+              <i class="fas fa-snowman"></i> Customers
+            </li>
+            <li className={Styles.menulineitem}>
+              <i class="fas fa-database"></i> Products
+            </li>
+            <li className={Styles.menulineitem}>
+              <i class="fas fa-file-invoice-dollar"></i> Purchases
+            </li>
+            <li className={Styles.menulineitem}>
+              <i class="fas fa-user-tie"></i> Vendors
+            </li>
+          </ul>
+        </div>
+        {/* main content */}
+        <div className={Styles.maincontent}>
+          <div className={Styles.header + " row"}>
+              <div className="col-lg-1 col-md-1 col-sm-1">
+                <div className={Styles.menuminimize}><i class="fas fa-bars"></i></div>
+              </div>
+              <div className="col-lg-8 col-md-6 col-sm-5">
+                <div className={Styles.headertext} >BASE COMPANY LTD.</div>
+              </div>
+              <div className="col-lg-3 col-md-5 col-sm-4">
+                <div className={Styles.searchbox}>
+                  <input className={Styles.searchboxinput + " form-control"} placeholder="Search"/>
+                </div>
+            </div>
+          </div>
+          <div>
+          
+          </div>
+        </div>
       </div>
     );
   }
