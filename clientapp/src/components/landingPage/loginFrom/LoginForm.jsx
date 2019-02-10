@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { instanceOf } from 'prop-types';
 import axios from'axios';
 import { withCookies, Cookies } from 'react-cookie';
-import { withRouter } from 'react-router-dom'
-import { compose } from 'redux'
-import './login.css'
+import { withRouter } from 'react-router-dom';
+import { compose } from 'redux';
+
 
 class LoginForm extends Component {
   static propTypes = {

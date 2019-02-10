@@ -7,9 +7,14 @@ module.exports = {
         path: path.join(__dirname, './dist')},
     module:{
         rules:[{
-            test: /\.js$/,
+            test: /\.(js|jsx)$/,
             exclude: /node_modules/,
-            loader: 'babel-loader'
+            use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: ['@babel/preset-env']
+                }
+            }
         },
         {
             test: /\.less$/,
@@ -28,6 +33,10 @@ module.exports = {
             {
                 loader: "less-loader"
             }]
+        },
+        {
+            test: /\.css$/,
+            use: ['style-loader', 'css-loader'],
         }]
     },
     plugins:[
