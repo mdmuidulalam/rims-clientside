@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
-import LoginForm from "./loginFrom/LoginForm.jsx";
-import { CookiesProvider } from 'react-cookie';
+
+import Styles  from './LandingPage.less';
+import LoginForm  from './loginFrom/LoginForm.jsx';
 
 export class LandingPage extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
   render() {
     return (
-      <CookiesProvider>
-        <div className="row justify-content-center">
-            <div className="col-md-4 col-md-offset-4">
-            <LoginForm />
-            </div>
+      <div className={ Styles.removemargin + " row"}>
+        <div className={ Styles.poster + " " + Styles.removepadding + " hidden-xs col-lg-8 col-md-6"}></div>
+        <div className={ Styles.removepadding + " col-lg-4 col-md-6 col-sm-12"}>
+          <LoginForm />
         </div>
-      </CookiesProvider>
+      </div>
     );
   }
 }

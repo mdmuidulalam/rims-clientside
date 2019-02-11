@@ -23,19 +23,19 @@ export class Home extends Component {
               MENU NAVIGATION
             </li>
             <li className={Styles.menulineitem}>
-              <i class="fas fa-shopping-cart"></i> Sales
+              <i className="fas fa-shopping-cart"></i> Sales
             </li>
             <li className={Styles.menulineitem}>
-              <i class="fas fa-snowman"></i> Customers
+              <i className="fas fa-snowman"></i> Customers
             </li>
             <li className={Styles.menulineitem}>
-              <i class="fas fa-database"></i> Products
+              <i className="fas fa-database"></i> Products
             </li>
             <li className={Styles.menulineitem}>
-              <i class="fas fa-file-invoice-dollar"></i> Purchases
+              <i className="fas fa-file-invoice-dollar"></i> Purchases
             </li>
             <li className={Styles.menulineitem}>
-              <i class="fas fa-user-tie"></i> Vendors
+              <i className="fas fa-user-tie"></i> Vendors
             </li>
           </ul>
         </div>
@@ -43,7 +43,7 @@ export class Home extends Component {
         <div className={Styles.maincontent}>
           <div className={Styles.header + " row"}>
               <div className="col-lg-1 col-md-1 col-sm-1">
-                <div className={Styles.menuminimize}><i class="fas fa-bars"></i></div>
+                <div className={Styles.menuminimize}><i className="fas fa-bars"></i></div>
               </div>
               <div className="col-lg-8 col-md-6 col-sm-5">
                 <div className={Styles.headertext} >BASE COMPANY LTD.</div>
