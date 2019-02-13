@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import Styles from './Home.less';
+import React, { Component } from "react";
+import Styles from "./Home.less";
 
 export class Home extends Component {
   render() {
@@ -8,55 +8,56 @@ export class Home extends Component {
         {/* sidebar content */}
         <div className={Styles.sidebar}>
           <div className={Styles.sidebarheader}>
-            <div className={Styles.headertext + " " + Styles.sidebarheadertext}>BASE</div>
+            <div className={Styles.headertext + " " + Styles.sidebarheadertext}>
+              BASE
+            </div>
           </div>
           <div className={Styles.userpanel}>
-            <div id="name">
-              Md Muidul Alam
-            </div>
+            <div id="name">Md Muidul Alam</div>
             <div>
-              <i className="fa fa-circle text-success"></i> Online
+              <i className="fa fa-circle text-success" /> Online
             </div>
           </div>
           <ul className={Styles.menu}>
-            <li className={Styles.menubar}>
-              MENU NAVIGATION
+            <li className={Styles.menubar}>MAIN NAVIGATION</li>
+            <li className={Styles.menulineitem}>
+              <i className="fas fa-shopping-cart" /> Sales
             </li>
             <li className={Styles.menulineitem}>
-              <i className="fas fa-shopping-cart"></i> Sales
+              <i className="fas fa-snowman" /> Customers
             </li>
             <li className={Styles.menulineitem}>
-              <i className="fas fa-snowman"></i> Customers
+              <i className="fas fa-database" /> Products
             </li>
             <li className={Styles.menulineitem}>
-              <i className="fas fa-database"></i> Products
+              <i className="fas fa-file-invoice-dollar" /> Purchases
             </li>
             <li className={Styles.menulineitem}>
-              <i className="fas fa-file-invoice-dollar"></i> Purchases
-            </li>
-            <li className={Styles.menulineitem}>
-              <i className="fas fa-user-tie"></i> Vendors
+              <i className="fas fa-user-tie" /> Vendors
             </li>
           </ul>
         </div>
         {/* main content */}
         <div className={Styles.maincontent}>
           <div className={Styles.header + " row"}>
-              <div className="col-lg-1 col-md-1 col-sm-1">
-                <div className={Styles.menuminimize}><i className="fas fa-bars"></i></div>
+            <div className="col-lg-1 col-md-1 col-sm-1">
+              <div className={Styles.menuminimize}>
+                <i className="fas fa-bars" />
               </div>
-              <div className="col-lg-8 col-md-6 col-sm-5">
-                <div className={Styles.headertext} >BASE COMPANY LTD.</div>
+            </div>
+            <div className="col-lg-8 col-md-6 col-sm-5">
+              <div className={Styles.headertext}>BASE COMPANY LTD.</div>
+            </div>
+            <div className="col-lg-3 col-md-5 col-sm-4">
+              <div className={Styles.searchbox}>
+                <input
+                  className={Styles.searchboxinput + " form-control"}
+                  placeholder="Search"
+                />
               </div>
-              <div className="col-lg-3 col-md-5 col-sm-4">
-                <div className={Styles.searchbox}>
-                  <input className={Styles.searchboxinput + " form-control"} placeholder="Search"/>
-                </div>
             </div>
           </div>
-          <div>
-          
-          </div>
+          <div />
         </div>
       </div>
     );

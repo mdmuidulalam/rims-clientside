@@ -16,26 +16,22 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
 
-    //declare state
     this.state = {
-      username: "",
+      email: "",
       password: "",
       showError: false,
       errorMessage: ""
     };
   }
 
-  //handle changes on all form inputs
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  //handle form submit
   handleSubmit(e) {
     e.preventDefault();
     const { cookies } = this.props;
 
-    //login request to server
     axios
       .post("/api/auth/login", {
         Email: this.state.email,
@@ -43,10 +39,7 @@ class LoginForm extends Component {
       })
       .then(response => {
         if (response.data.success) {
-          //valid credentials
-          //save token in cookie
           cookies.set("jwtToken", response.data.entity, { path: "/" });
-          //ridirect to home
           this.props.history.push("/home");
         } else {
           throw "invalid credentials";
@@ -58,6 +51,11 @@ class LoginForm extends Component {
           this.setState({
             errorMessage:
               "You have entered an <strong>invalid email or password</strong>"
+          });
+        } else {
+          this.setState({
+            errorMessage:
+              "Service isn't availabe. <strong>Please, contact customer support</strong>"
           });
         }
       });
@@ -99,7 +97,7 @@ class LoginForm extends Component {
             </div>
           </div>
           {this.state.showError ? (
-            <div class="alert alert-danger">
+            <div className="alert alert-danger">
               {renderHTML(this.state.errorMessage)}
             </div>
           ) : null}
