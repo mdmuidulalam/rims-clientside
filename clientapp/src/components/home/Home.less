@@ -1,0 +1,109 @@
+@maincolor: #00a65a;
+@secondcolor: #222d32;
+@backcolor: white;
+@textfont: "Roboto", sans-serif;
+
+/* sidebar styles */
+.sidebar {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 230px;
+  min-height: 100%;
+  background-color: @secondcolor;
+  font-family: @textfont;
+  color: @backcolor;
+}
+
+.sidebarheader {
+  min-height: 50px;
+  max-height: 50px;
+  background-color: darken(@maincolor, 3%);
+}
+
+/* header styles */
+.header {
+  min-height: 50px;
+  background-color: @maincolor;
+  margin-right: auto !important;
+}
+
+.headertext {
+  font-size: 30px;
+  padding-left: 10px;
+  color: @backcolor;
+  font-family: @textfont;
+  text-align: center;
+}
+
+.sidebarheadertext {
+  text-align: center;
+}
+
+/* maincontent styles */
+.maincontent {
+  margin-left: 230px;
+}
+
+/* searchbox styles*/
+.searchbox {
+  padding: 5px;
+}
+
+.searchboxinput {
+  border: 1px solid @maincolor;
+  background-color: darken(@backcolor, 10%);
+  &:focus {
+    background-color: @backcolor;
+    border: 1px solid @maincolor;
+    box-shadow: 0 0 8px @maincolor;
+  }
+}
+
+/* userpanel */
+.userpanel {
+  padding: 10px;
+}
+
+/* horizontal bar*/
+.menubar {
+  list-style-type: none;
+  text-align: center;
+  color: darken(@backcolor, 50%);
+  background-color: darken(@secondcolor, 10%);
+}
+
+/* menu */
+.menu {
+  padding-left: 0;
+}
+
+/* sidebar menu line item */
+.menulineitem {
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-size: 17px;
+  cursor: pointer;
+  list-style-type: none;
+  color: @backcolor;
+  background-color: lighten(@secondcolor, 3%);
+  &:hover {
+    background-color: darken(@secondcolor, 3%);
+  }
+}
+
+/* menu menuminimize*/
+.menuminimize {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 23px;
+  color: @backcolor;
+  cursor: pointer;
+  &:hover {
+    background-color: darken(@maincolor, 2%);
+    width: 44px;
+  }
+}
