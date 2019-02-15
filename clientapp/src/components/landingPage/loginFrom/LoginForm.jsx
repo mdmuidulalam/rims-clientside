@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { instanceOf } from "prop-types";
-import axios from "axios";
 import { withCookies, Cookies } from "react-cookie";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import renderHTML from "react-render-html";
 
 import Styles from "./LoginForm.less";
+import AuthService from "../../../services/Auth";
 
 class LoginForm extends Component {
   static propTypes = {
@@ -16,6 +16,7 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
 
+    this.Auth = new AuthService();
     this.state = {
       email: "",
       password: "",
@@ -32,11 +33,7 @@ class LoginForm extends Component {
     e.preventDefault();
     const { cookies } = this.props;
 
-    axios
-      .post("/api/auth/login", {
-        Email: this.state.email,
-        Password: this.state.password
-      })
+    this.Auth.login(this.state.email, this.state.password)
       .then(response => {
         if (response.data.success) {
           cookies.set("jwtToken", response.data.entity, { path: "/" });

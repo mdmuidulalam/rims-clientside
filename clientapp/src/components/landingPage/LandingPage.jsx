@@ -3,10 +3,11 @@ import React, { Component } from "react";
 import Styles from "./LandingPage.less";
 import LoginForm from "./loginFrom/LoginForm.jsx";
 
-export class LandingPage extends Component {
+export default class LandingPage extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     return (
       <div className={Styles.removemargin + " row"}>

@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import Styles from "./Home.less";
+import { Switch, Route } from "react-router-dom";
 
-export class Home extends Component {
+import Styles from "./Home.less";
+import Products from "./products/Products.jsx";
+import Customers from "./customers/Customers.jsx";
+
+export default class Home extends Component {
   render() {
     return (
       <div>
@@ -57,7 +61,7 @@ export class Home extends Component {
               </div>
             </div>
           </div>
-          <div />
+          <div>Pages Here</div>
         </div>
       </div>
     );
