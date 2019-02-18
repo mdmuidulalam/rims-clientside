@@ -93,7 +93,7 @@
   }
 }
 
-/* menu menuminimize*/
+/* menu menuminimize */
 .menuminimize {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -105,5 +105,18 @@
   &:hover {
     background-color: darken(@maincolor, 2%);
     width: 44px;
+  }
+}
+
+/* remove the default styling from navlink */
+.menunavlink {
+  text-decoration: none;
+  color: #ffffff;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none;
   }
 }
