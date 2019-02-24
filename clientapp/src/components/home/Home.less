@@ -93,6 +93,12 @@
   }
 }
 
+/* Sidebar Active menu item */
+.menuactive li {
+  background-color: darken(@secondcolor, 4%);
+  border-left: 3px solid @maincolor;
+}
+
 /* menu menuminimize */
 .menuminimize {
   padding-top: 8px;
@@ -111,7 +117,6 @@
 /* remove the default styling from navlink */
 .menunavlink {
   text-decoration: none;
-  color: #ffffff;
   &:focus,
   &:hover,
   &:visited,

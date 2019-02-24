@@ -1,10 +1,13 @@
 import React, { Component } from "react";
-import { HashRouter, Route, NavLink } from "react-router-dom";
+import { Route, NavLink } from "react-router-dom";
 
 import Styles from "./Home.less";
 import Products from "./products/Products.jsx";
 import Customers from "./customers/Customers.jsx";
 import Dashboard from "./dashboard/Dashboard.jsx";
+import Orders from "./orders/Orders.jsx";
+import Purchases from "./purchases/Purchases.jsx";
+import Vendors from "./vendors/Vendors.jsx";
 
 export default class Home extends Component {
   render() {
@@ -25,33 +28,63 @@ export default class Home extends Component {
           </div>
           <ul className={Styles.menu}>
             <li className={Styles.menubar}>MAIN NAVIGATION</li>
-            <NavLink to="/home" className={Styles.menunavlink}>
+            <NavLink
+              to="/dashboard"
+              className={Styles.menunavlink}
+              activeClassName={Styles.menuactive}
+            >
               <li className={Styles.menulineitem}>
-                <i className="fas fa-home" /> Home
+                <i className="fas fa-chalkboard" /> Dashboard
               </li>
             </NavLink>
-            <li className={Styles.menulineitem}>
-              <i className="fas fa-shopping-cart" /> Sales
-            </li>
-            <NavLink to="/customers" className={Styles.menunavlink}>
+            <NavLink
+              to="/orders"
+              className={Styles.menunavlink}
+              activeClassName={Styles.menuactive}
+            >
+              <li className={Styles.menulineitem}>
+                <i className="fas fa-shopping-cart" /> Orders
+              </li>
+            </NavLink>
+            <NavLink
+              to="/customers"
+              className={Styles.menunavlink}
+              activeClassName={Styles.menuactive}
+            >
               <li className={Styles.menulineitem}>
                 <i className="fas fa-snowman" /> Customers
               </li>
             </NavLink>
-            <NavLink to="/products" className={Styles.menunavlink}>
+            <NavLink
+              to="/products"
+              className={Styles.menunavlink}
+              activeClassName={Styles.menuactive}
+            >
               <li className={Styles.menulineitem}>
                 <i className="fas fa-database" /> Products
               </li>
             </NavLink>
-            <li className={Styles.menulineitem}>
-              <i className="fas fa-file-invoice-dollar" /> Purchases
-            </li>
-            <li className={Styles.menulineitem}>
-              <i className="fas fa-user-tie" /> Vendors
-            </li>
+            <NavLink
+              to="/purchases"
+              className={Styles.menunavlink}
+              activeClassName={Styles.menuactive}
+            >
+              <li className={Styles.menulineitem}>
+                <i className="fas fa-file-invoice-dollar" /> Purchases
+              </li>
+            </NavLink>
+            <NavLink
+              to="/vendors"
+              className={Styles.menunavlink}
+              activeClassName={Styles.menuactive}
+            >
+              <li className={Styles.menulineitem}>
+                <i className="fas fa-user-tie" /> Vendors
+              </li>
+            </NavLink>
           </ul>
         </div>
-
+        {/* header content */}
         <div className={Styles.maincontent}>
           <div className={Styles.header + " row"}>
             <div className="col-lg-1 col-md-1 col-sm-1">
@@ -73,9 +106,12 @@ export default class Home extends Component {
           </div>
           {/* main content */}
           <div>
-            <Route exact path="/home" component={Dashboard} />
-            <Route exact path="/customers" component={Customers} />
-            <Route exact path="/products" component={Products} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/orders" component={Orders} />
+            <Route path="/customers" component={Customers} />
+            <Route path="/products" component={Products} />
+            <Route path="/purchases" component={Purchases} />
+            <Route path="/vendors" component={Vendors} />
           </div>
         </div>
       </div>
