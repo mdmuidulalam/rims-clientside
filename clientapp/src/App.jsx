@@ -1,16 +1,21 @@
 import React, { Component } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 
 import Home from "./components/home/Home.jsx";
 import LandingPage from "./components/landingPage/LandingPage.jsx";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+  }
   render() {
     return (
-      <Switch>
-        <Route exact path="/" component={LandingPage} />
-        <Home />
-      </Switch>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+          <Route path="/home" component={Home} />
+        </Switch>
+      </BrowserRouter>
     );
   }
 }

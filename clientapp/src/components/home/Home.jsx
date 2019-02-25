@@ -10,6 +10,10 @@ import Purchases from "./purchases/Purchases.jsx";
 import Vendors from "./vendors/Vendors.jsx";
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+  }
+
   render() {
     return (
       <div>
@@ -29,7 +33,7 @@ export default class Home extends Component {
           <ul className={Styles.menu}>
             <li className={Styles.menubar}>MAIN NAVIGATION</li>
             <NavLink
-              to="/dashboard"
+              to={`${this.props.match.path}/dashboard`}
               className={Styles.menunavlink}
               activeClassName={Styles.menuactive}
             >
@@ -38,7 +42,7 @@ export default class Home extends Component {
               </li>
             </NavLink>
             <NavLink
-              to="/orders"
+              to={`${this.props.match.path}/orders`}
               className={Styles.menunavlink}
               activeClassName={Styles.menuactive}
             >
@@ -47,7 +51,7 @@ export default class Home extends Component {
               </li>
             </NavLink>
             <NavLink
-              to="/customers"
+              to={`${this.props.match.path}/customers`}
               className={Styles.menunavlink}
               activeClassName={Styles.menuactive}
             >
@@ -56,7 +60,7 @@ export default class Home extends Component {
               </li>
             </NavLink>
             <NavLink
-              to="/products"
+              to={`${this.props.match.path}/products`}
               className={Styles.menunavlink}
               activeClassName={Styles.menuactive}
             >
@@ -65,7 +69,7 @@ export default class Home extends Component {
               </li>
             </NavLink>
             <NavLink
-              to="/purchases"
+              to={`${this.props.match.path}/purchases`}
               className={Styles.menunavlink}
               activeClassName={Styles.menuactive}
             >
@@ -74,7 +78,7 @@ export default class Home extends Component {
               </li>
             </NavLink>
             <NavLink
-              to="/vendors"
+              to={`${this.props.match.path}/vendors`}
               className={Styles.menunavlink}
               activeClassName={Styles.menuactive}
             >
@@ -106,12 +110,30 @@ export default class Home extends Component {
           </div>
           {/* main content */}
           <div>
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/orders" component={Orders} />
-            <Route path="/customers" component={Customers} />
-            <Route path="/products" component={Products} />
-            <Route path="/purchases" component={Purchases} />
-            <Route path="/vendors" component={Vendors} />
+            <Route
+              path={`${this.props.match.path}/dashboard`}
+              component={Dashboard}
+            />
+            <Route
+              path={`${this.props.match.path}/orders`}
+              component={Orders}
+            />
+            <Route
+              path={`${this.props.match.path}/customers`}
+              component={Customers}
+            />
+            <Route
+              path={`${this.props.match.path}/products`}
+              component={Products}
+            />
+            <Route
+              path={`${this.props.match.path}/purchases`}
+              component={Purchases}
+            />
+            <Route
+              path={`${this.props.match.path}/vendors`}
+              component={Vendors}
+            />
           </div>
         </div>
       </div>

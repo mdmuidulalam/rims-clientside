@@ -37,7 +37,7 @@ class LoginForm extends Component {
       .then(response => {
         if (response.data.success) {
           cookies.set("jwtToken", response.data.entity, { path: "/" });
-          this.props.history.push("/dashboard");
+          this.props.history.push("/home/dashboard");
         } else {
           throw "invalid credentials";
         }
