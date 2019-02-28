@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
-import GridStyles from "../../../../utilities/css/Grid.less";
+import GridStyles from "../../../../utilities/css/Grid.css";
+import BoxStyles from "../../../../utilities/css/Box.less";
 
 class ProductsGrid extends Component {
   constructor(props) {
@@ -25,14 +26,6 @@ class ProductsGrid extends Component {
       .catch(error => {});
   };
 
-  //should be moved to utilities/reactTable.js
-  filterMethod = (filter, row, column) => {
-    const id = filter.pivotId || filter.id;
-    return row[id] !== undefined
-      ? String(row[id].toLowerCase()).startsWith(filter.value.toLowerCase())
-      : true;
-  };
-
   componentDidMount() {
     this.getProducts();
   }
@@ -40,35 +33,39 @@ class ProductsGrid extends Component {
   render() {
     const columns = [
       {
-        Header: "ID",
-        accessor: "id"
+        Header: "Name",
+        accessor: "ProductName",
+        style: {
+          textAlign: "center"
+        }
       },
       {
-        Header: "Product Name",
-        accessor: "ProductName"
-      },
-      {
-        Header: "Product Price",
-        accessor: "ProductPrice"
-      },
-      {
-        Header: "Quantity",
-        accessor: "QuantityOnHand"
+        Header: "Price",
+        accessor: "ProductPrice",
+        style: {
+          textAlign: "center"
+        }
       }
     ];
 
     return (
-      <div>
-        <div className={GridStyles.gridTitle}>
-          <h1>Products</h1>
-        </div>
-        <div className={GridStyles.gridBody}>
-          <ReactTable
-            data={this.state.products}
-            columns={columns}
-            filterable
-            defaultFilterMethod={this.filterMethod}
-          />
+      <div className="row">
+        <div className="col-12">
+          <div className={BoxStyles.box}>
+            <div className={BoxStyles["box-header"]}>
+              <span className={BoxStyles["box-title"]}>
+                <i className="fas fa-database" /> Products
+              </span>
+            </div>
+            <div className={BoxStyles["box-body"]}>
+              <ReactTable
+                data={this.state.products}
+                columns={columns}
+                defaultPageSize={10}
+                className="-striped -highlight"
+              />
+            </div>
+          </div>
         </div>
       </div>
     );
