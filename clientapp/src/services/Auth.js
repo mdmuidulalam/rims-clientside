@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default class Auth {
+export default class AuthService {
   login(email, password) {
     return axios.post("/api/auth/login", {
       Email: email,

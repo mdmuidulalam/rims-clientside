@@ -16,7 +16,7 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
 
-    this.Auth = new AuthService();
+    this.authService = new AuthService();
     this.state = {
       email: "",
       password: "",
@@ -33,7 +33,8 @@ class LoginForm extends Component {
     e.preventDefault();
     const { cookies } = this.props;
 
-    this.Auth.login(this.state.email, this.state.password)
+    this.authService
+      .login(this.state.email, this.state.password)
       .then(response => {
         if (response.data.success) {
           cookies.set("jwtToken", response.data.entity, { path: "/" });

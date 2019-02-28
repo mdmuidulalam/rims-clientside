@@ -1,21 +1,61 @@
 import React, { Component } from "react";
-import axios from "axios";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
+
 import GridStyles from "../../../../utilities/css/Grid.css";
 import BoxStyles from "../../../../utilities/css/Box.less";
+import ProductService from "../../../../services/Product";
 
 class ProductsGrid extends Component {
   constructor(props) {
     super(props);
+
+    this.productService = new ProductService();
     this.state = {
       products: []
     };
   }
 
+  /// OverRide Functions
+
+  componentDidMount = () => {
+    this.getProducts();
+  };
+
+  /// End OverRide Functions
+
+  /// Class Variables
+
+  /// Product Grid Columns
+  columns = [
+    {
+      Header: "Name",
+      accessor: "ProductName",
+      style: {
+        textAlign: "center"
+      }
+    },
+    {
+      Header: "QuntityOnHand",
+      accessor: "ProductQuntityOnHand",
+      style: {
+        textAlign: "center"
+      }
+    },
+    {
+      Header: "Price",
+      accessor: "ProductPrice",
+      style: {
+        textAlign: "center"
+      }
+    }
+  ];
+
+  /// End Class Variables
+
   getProducts = () => {
-    axios
-      .get("/api/products/get")
+    this.productService
+      .getProducts()
       .then(response => {
         if (response.data.success) {
           this.setState({ products: response.data.entity });
@@ -26,28 +66,7 @@ class ProductsGrid extends Component {
       .catch(error => {});
   };
 
-  componentDidMount() {
-    this.getProducts();
-  }
-
   render() {
-    const columns = [
-      {
-        Header: "Name",
-        accessor: "ProductName",
-        style: {
-          textAlign: "center"
-        }
-      },
-      {
-        Header: "Price",
-        accessor: "ProductPrice",
-        style: {
-          textAlign: "center"
-        }
-      }
-    ];
-
     return (
       <div className="row">
         <div className="col-12">
@@ -60,7 +79,7 @@ class ProductsGrid extends Component {
             <div className={BoxStyles["box-body"]}>
               <ReactTable
                 data={this.state.products}
-                columns={columns}
+                columns={this.columns}
                 defaultPageSize={10}
                 className="-striped -highlight"
               />
