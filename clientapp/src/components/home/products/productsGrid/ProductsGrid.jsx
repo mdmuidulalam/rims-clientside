@@ -119,7 +119,7 @@ class ProductsGrid extends Component {
                       <select
                         className={"form-control " + RandomStyles["inputfield"]}
                         key={i}
-                        value={col.Header}
+                        //value={col.Header}
                       >
                         {this.columns.map(col => (
                           <option key={col.Header}>{col.Header}</option>
