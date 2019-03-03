@@ -2,6 +2,7 @@ import { LOG_IN_UPDATE_FIELD, LOG_IN_PAGE_UNLOADED } from "../actionTypes";
 
 export default (
   state = {
+    /* Model Elements */
     email: "",
     password: "",
     /* View Elements */
@@ -12,7 +13,7 @@ export default (
 ) => {
   switch (action.type) {
     case LOG_IN_UPDATE_FIELD:
-      return { ...state, [action.key]: action.value };
+      return { ...state, [action.key]: action.payload };
     case LOG_IN_PAGE_UNLOADED:
       return {};
     default:

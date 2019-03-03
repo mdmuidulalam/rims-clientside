@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 
 import Styles from "./LoginForm.less";
 import AuthService from "../../../services/Auth";
+
 import {
   LOG_IN_UPDATE_FIELD,
   LOG_IN_PAGE_UNLOADED
@@ -16,17 +17,21 @@ import {
 const mapStateToProps = state => ({ ...state.login });
 
 const mapDispatchToProps = dispatch => ({
-  onChangeEmail: value =>
-    dispatch({ type: LOG_IN_UPDATE_FIELD, key: "email", value }),
-  onChangePassword: value =>
-    dispatch({ type: LOG_IN_UPDATE_FIELD, key: "password", value }),
-  onChangeShowValidationError: value =>
-    dispatch({ type: LOG_IN_UPDATE_FIELD, key: "showValidationError", value }),
-  onChangeValidationErrorMessage: value =>
+  onChangeEmail: payload =>
+    dispatch({ type: LOG_IN_UPDATE_FIELD, key: "email", payload }),
+  onChangePassword: payload =>
+    dispatch({ type: LOG_IN_UPDATE_FIELD, key: "password", payload }),
+  onChangeShowValidationError: payload =>
+    dispatch({
+      type: LOG_IN_UPDATE_FIELD,
+      key: "showValidationError",
+      payload
+    }),
+  onChangeValidationErrorMessage: payload =>
     dispatch({
       type: LOG_IN_UPDATE_FIELD,
       key: "validationErrorMessage",
-      value
+      payload
     }),
   onUnload: () => dispatch({ type: LOG_IN_PAGE_UNLOADED })
 });
