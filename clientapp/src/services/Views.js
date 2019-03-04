@@ -32,9 +32,16 @@ export default class ViewsService {
               {
                 Id: 4,
                 GridType: 2,
-                Header: "Price",
-                accessor: "ProductPrice",
+                Header: "Phone",
+                accessor: "CustomerPhone",
                 SortOrder: 2
+              },
+              {
+                Id: 5,
+                GridType: 2,
+                Header: "Name",
+                accessor: "CustomerName",
+                SortOrder: 1
               }
             ]
           }
