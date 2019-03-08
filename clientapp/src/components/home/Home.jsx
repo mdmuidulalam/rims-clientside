@@ -89,7 +89,7 @@ export default class Home extends Component {
           </ul>
         </div>
         {/* header content */}
-        <div className={Styles.maincontent}>
+        <div className={Styles.maincontentandheader}>
           <div className={Styles.header + " row"}>
             <div className="col-lg-1 col-md-1 col-sm-1">
               <div className={Styles.menuminimize}>
@@ -109,7 +109,7 @@ export default class Home extends Component {
             </div>
           </div>
           {/* main content */}
-          <div>
+          <div className={Styles.maincontent}>
             <Route
               path={`${this.props.match.path}/dashboard`}
               component={Dashboard}

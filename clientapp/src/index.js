@@ -1,16 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { CookiesProvider } from "react-cookie";
+import { Provider } from "react-redux";
+
 import "./index.less";
 import App from "./App.jsx";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
-import { CookiesProvider } from "react-cookie";
+import { store } from "./store";
 
 ReactDOM.render(
-  <CookiesProvider>
-    <App />
-  </CookiesProvider>,
+  <Provider store={store}>
+    <CookiesProvider>
+      <App />
+    </CookiesProvider>
+  </Provider>,
   document.getElementById("root")
 );
 

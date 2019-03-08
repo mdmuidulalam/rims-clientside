@@ -4,9 +4,37 @@ import { withCookies, Cookies } from "react-cookie";
 import { withRouter } from "react-router-dom";
 import { compose } from "redux";
 import renderHTML from "react-render-html";
+import { connect } from "react-redux";
 
 import Styles from "./LoginForm.less";
 import AuthService from "../../../services/Auth";
+
+import {
+  LOG_IN_UPDATE_FIELD,
+  LOG_IN_PAGE_UNLOADED
+} from "../../../actionTypes";
+
+const mapStateToProps = state => ({ ...state.login });
+
+const mapDispatchToProps = dispatch => ({
+  onChangeEmail: payload =>
+    dispatch({ type: LOG_IN_UPDATE_FIELD, key: "email", payload }),
+  onChangePassword: payload =>
+    dispatch({ type: LOG_IN_UPDATE_FIELD, key: "password", payload }),
+  onChangeShowValidationError: payload =>
+    dispatch({
+      type: LOG_IN_UPDATE_FIELD,
+      key: "showValidationError",
+      payload
+    }),
+  onChangeValidationErrorMessage: payload =>
+    dispatch({
+      type: LOG_IN_UPDATE_FIELD,
+      key: "validationErrorMessage",
+      payload
+    }),
+  onUnload: () => dispatch({ type: LOG_IN_PAGE_UNLOADED })
+});
 
 class LoginForm extends Component {
   static propTypes = {
@@ -16,24 +44,23 @@ class LoginForm extends Component {
   constructor(props) {
     super(props);
 
-    this.Auth = new AuthService();
-    this.state = {
-      email: "",
-      password: "",
-      showError: false,
-      errorMessage: ""
-    };
+    this.authService = new AuthService();
   }
 
-  handleChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+  /* Override Functions */
+
+  componentWillUnmount() {
+    this.props.onUnload();
   }
+
+  /* End Override Functions */
 
   handleSubmit(e) {
     e.preventDefault();
     const { cookies } = this.props;
 
-    this.Auth.login(this.state.email, this.state.password)
+    this.authService
+      .login(this.props.email, this.props.password)
       .then(response => {
         if (response.data.success) {
           cookies.set("jwtToken", response.data.entity, { path: "/" });
@@ -43,17 +70,15 @@ class LoginForm extends Component {
         }
       })
       .catch(error => {
-        this.setState({ showError: true });
+        this.props.onChangeShowValidationError(true);
         if (error === "invalid credentials") {
-          this.setState({
-            errorMessage:
-              "You have entered an <strong>invalid email or password</strong>"
-          });
+          this.props.onChangeValidationErrorMessage(
+            "You have entered an <strong>invalid email or password</strong>"
+          );
         } else {
-          this.setState({
-            errorMessage:
-              "Service isn't availabe. <strong>Please, contact customer support</strong>"
-          });
+          this.props.onChangeValidationErrorMessage(
+            "Service isn't availabe. <strong>Please, contact customer support</strong>"
+          );
         }
       });
   }
@@ -68,8 +93,8 @@ class LoginForm extends Component {
           <div>
             <div className={Styles.group}>
               <input
-                value={this.state.email}
-                onChange={event => this.handleChange(event)}
+                value={this.props.email}
+                onChange={event => this.props.onChangeEmail(event.target.value)}
                 type="text"
                 name="email"
                 id="name"
@@ -81,8 +106,10 @@ class LoginForm extends Component {
             </div>
             <div className={Styles.group}>
               <input
-                value={this.state.password}
-                onChange={event => this.handleChange(event)}
+                value={this.props.password}
+                onChange={event =>
+                  this.props.onChangePassword(event.target.value)
+                }
                 type="password"
                 name="password"
                 id="password"
@@ -93,9 +120,9 @@ class LoginForm extends Component {
               <label>Password</label>
             </div>
           </div>
-          {this.state.showError ? (
+          {this.props.showValidationError ? (
             <div className="alert alert-danger">
-              {renderHTML(this.state.errorMessage)}
+              {renderHTML(this.props.validationErrorMessage)}
             </div>
           ) : null}
           <button
@@ -112,5 +139,9 @@ class LoginForm extends Component {
 
 export default compose(
   withRouter,
-  withCookies
+  withCookies,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(LoginForm);
