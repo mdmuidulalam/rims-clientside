@@ -9,16 +9,7 @@ import {
 export default (
   state = {
     /* Model Elements */
-    columns: [
-      {
-        Header: "Name",
-        accessor: "ProductName"
-      },
-      {
-        Header: "Quantity On Hand",
-        accessor: "ProductQuantityOnHand"
-      }
-    ],
+    columns: [],
     allColumns: []
   },
   action
