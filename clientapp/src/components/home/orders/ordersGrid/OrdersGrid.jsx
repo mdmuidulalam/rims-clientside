@@ -9,7 +9,7 @@ class OrdersGrid extends Component {
     super(props);
 
     this.ordersService = new OrdersService();
-    this.Heading = '<i className="fas fa-snowman" /> Orders';
+    this.Heading = '<i className="fas fa-shopping-cart" /> Orders';
   }
 
   render() {
