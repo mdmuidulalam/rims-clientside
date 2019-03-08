@@ -104,9 +104,14 @@ class CustomGrid extends Component {
       let allColumns = cookies.get("allColumns");
       if (allColumns == undefined) {
         resolve(
-          this.viewsService
-            .getDataGridColumns()
-            .then(response => response.data.entity)
+          this.viewsService.getDataGridColumns().then(response => {
+            response.data.entity.map(col => {
+              col.accessor = col.Accessor;
+              delete col.Accessor;
+              return col;
+            });
+            return response.data.entity;
+          })
         );
       } else {
         resolve(allColumns);
@@ -160,7 +165,9 @@ class CustomGrid extends Component {
     this.props
       .GetData()
       .then(response => {
+        console.log(response);
         if (response.data.success) {
+          console.log(response.data.entity);
           this.props.changeGridData(response.data.entity);
         } else {
           throw "something went wrong";
