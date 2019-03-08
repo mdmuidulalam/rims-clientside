@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import ProductsService from "../../../../services/Products";
-import ViewsService from "../../../../services/Views";
 import GridTypes from "../../../../enums/GridTypes";
 import CustomGrid from "../../../shared/CustomGrid.jsx";
 
@@ -10,7 +9,6 @@ class ProductsGrid extends Component {
     super(props);
 
     this.productsService = new ProductsService();
-    this.viewsService = new ViewsService();
     this.Heading = '<i className="fas fa-database" /> Products';
   }
 
