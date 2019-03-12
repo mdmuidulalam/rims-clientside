@@ -122,8 +122,6 @@ class CustomGrid extends Component {
           path: "/home"
         });
 
-        console.log(allColumns);
-
         let allGridColumns = allColumns.filter(col => {
           if (col.GridType == this.props.GridType) return col;
         });
@@ -165,9 +163,7 @@ class CustomGrid extends Component {
     this.props
       .GetData()
       .then(response => {
-        console.log(response);
         if (response.data.success) {
-          console.log(response.data.entity);
           this.props.changeGridData(response.data.entity);
         } else {
           throw "something went wrong";
