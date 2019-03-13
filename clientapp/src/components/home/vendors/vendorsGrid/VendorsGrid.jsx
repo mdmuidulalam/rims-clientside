@@ -4,7 +4,7 @@ import VendorsService from "../../../../services/Vendors";
 import GridTypes from "../../../../enums/GridTypes";
 import CustomGrid from "../../../shared/CustomGrid.jsx";
 
-class CustpmersGrid extends Component {
+class VendorsGrid extends Component {
   constructor(props) {
     super(props);
 
@@ -23,4 +23,4 @@ class CustpmersGrid extends Component {
   }
 }
 
-export default CustpmersGrid;
+export default VendorsGrid;

@@ -4,7 +4,7 @@ import { Route } from "react-router-dom";
 import EditVendors from "./editVendors/EditVendors.jsx";
 import VendorsGrid from "./vendorsGrid/VendorsGrid.jsx";
 
-class Purchases extends Component {
+class Vendors extends Component {
   constructor(props) {
     super(props);
   }
@@ -19,4 +19,4 @@ class Purchases extends Component {
   }
 }
 
-export default Purchases;
+export default Vendors;
