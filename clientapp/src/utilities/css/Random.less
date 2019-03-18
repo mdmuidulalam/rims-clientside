@@ -23,3 +23,25 @@
   border-color: @maincolor !important;
   box-shadow: 0 0 0 0.03rem @maincolor !important;
 }
+
+///Primary button
+.primary-button {
+  background-color: @maincolor !important;
+  border: @maincolor !important;
+  &:hover {
+    background-color: darken(@maincolor, 10%) !important;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.1rem lighten(@maincolor, 7%) !important;
+  }
+}
+
+.secondary-button {
+  background-color: darken(@backcolor, 10%) !important;
+  &:hover {
+    background-color: darken(@backcolor, 20%) !important;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.1rem lighten(@backcolor, 10%) !important;
+  }
+}

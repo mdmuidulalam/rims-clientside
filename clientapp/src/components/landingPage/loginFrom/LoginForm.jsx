@@ -86,13 +86,17 @@ class LoginForm extends Component {
   render() {
     return (
       <div className={Styles.logIn}>
-        <form onSubmit={event => this.handleSubmit(event)}>
-          <h1>
+        <form
+          className={Styles.loginform}
+          onSubmit={event => this.handleSubmit(event)}
+        >
+          <h1 className={Styles.loginformh1}>
             <b>Hey, good to see you again!!!</b>
           </h1>
           <div>
             <div className={Styles.group}>
               <input
+                className={Styles.logininput}
                 value={this.props.email}
                 onChange={event => this.props.onChangeEmail(event.target.value)}
                 type="text"
@@ -102,10 +106,11 @@ class LoginForm extends Component {
               />
               <span className={Styles.highlight} />
               <span className={Styles.bar} />
-              <label>Email</label>
+              <label className={Styles.loginlabel}>Email</label>
             </div>
             <div className={Styles.group}>
               <input
+                className={Styles.logininput}
                 value={this.props.password}
                 onChange={event =>
                   this.props.onChangePassword(event.target.value)
@@ -117,7 +122,7 @@ class LoginForm extends Component {
               />
               <span className={Styles.highlight} />
               <span className={Styles.bar} />
-              <label>Password</label>
+              <label className={Styles.loginlabel}>Password</label>
             </div>
           </div>
           {this.props.showValidationError ? (
