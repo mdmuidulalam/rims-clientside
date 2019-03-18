@@ -110,6 +110,9 @@ class CustomGrid extends Component {
               delete col.Accessor;
               return col;
             });
+            cookies.set("allColumns", response.data.entity, {
+              path: "/home"
+            });
             return response.data.entity;
           })
         );
@@ -118,12 +121,6 @@ class CustomGrid extends Component {
       }
     })
       .then(allColumns => {
-        cookies.set("allColumns", allColumns, {
-          path: "/home"
-        });
-
-        console.log(allColumns);
-
         let allGridColumns = allColumns.filter(col => {
           if (col.GridType == this.props.GridType) return col;
         });
@@ -165,9 +162,7 @@ class CustomGrid extends Component {
     this.props
       .GetData()
       .then(response => {
-        console.log(response);
         if (response.data.success) {
-          console.log(response.data.entity);
           this.props.changeGridData(response.data.entity);
         } else {
           throw "something went wrong";
@@ -204,6 +199,34 @@ class CustomGrid extends Component {
                     columns={this.props.gridColumns}
                     defaultPageSize={10}
                     className="-striped -highlight"
+                    getTdProps={(state, rowInfo, column, instance) => {
+                      return {
+                        onClick: (e, handleOriginal) => {
+                          console.log("A Td Element was clicked!");
+                          console.log("it produced this event:", e);
+                          console.log("It was in this column:", column);
+                          console.log("It was in this row:", rowInfo);
+                          console.log(
+                            "It was in this table instance:",
+                            instance
+                          );
+                          this.props.history.push(
+                            `${this.props.match.path}/edit?id=${
+                              rowInfo.original.id
+                            }`
+                          );
+
+                          // IMPORTANT! React-Table uses onClick internally to trigger
+                          // events like expanding SubComponents and pivots.
+                          // By default a custom 'onClick' handler will override this functionality.
+                          // If you want to fire the original onClick handler, call the
+                          // 'handleOriginal' function.
+                          // if (handleOriginal) {
+                          //   handleOriginal();
+                          // }
+                        }
+                      };
+                    }}
                   />
                 </div>
               </div>
