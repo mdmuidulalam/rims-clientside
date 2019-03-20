@@ -93,7 +93,7 @@ export default class Home extends Component {
               activeClassName={Styles.menuactive}
             >
               <li className={Styles.menulineitem}>
-                <i class="fas fa-balance-scale" /> Accounting
+                <i className="fas fa-balance-scale" /> Transactions
               </li>
             </NavLink>
           </ul>
