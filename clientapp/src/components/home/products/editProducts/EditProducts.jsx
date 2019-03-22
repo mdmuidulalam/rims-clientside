@@ -4,9 +4,8 @@ import { connect } from "react-redux";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 import { withRouter } from "react-router-dom";
-import Promise from "bluebird";
 import queryString from "query-string";
-import { Modal, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -16,7 +15,7 @@ import EditProductsStyles from "./EditProducts.less";
 import ViewsService from "../../../../services/Views";
 import ProductsService from "../../../../services/Products";
 import EntityTypes from "../../../../enums/EntityTypes";
-import EntityFieldTypes from "../../../../enums/EntityFieldTypes";
+import CustomFields from "../../../shared/CustomFields.jsx";
 
 import {
   MAJOR_ENTITY_UPDATE_AREAS,
@@ -63,21 +62,7 @@ class EditProducts extends Component {
 
   getAreasAndFeilds() {
     const { cookies } = this.props;
-    return new Promise((resolve, reject) => {
-      let allAreasAndFields = cookies.get("allAreasAndFields");
-      if (allAreasAndFields == undefined) {
-        resolve(
-          this.viewsService.getEntityAreas().then(response => {
-            cookies.set("allAreasAndFields", response.data.entity, {
-              path: "/home"
-            });
-            return response.data.entity;
-          })
-        );
-      } else {
-        resolve(allAreasAndFields);
-      }
-    }).then(allAreasAndFields => {
+    return this.viewsService.getEntityAreas(cookies).then(allAreasAndFields => {
       let allAreas = allAreasAndFields.areas.filter(
         area => area.EntityTypes == EntityTypes.Product
       );
@@ -108,10 +93,8 @@ class EditProducts extends Component {
   }
 
   saveEntityData() {
-    ///Logic Steps
     this.props.showSaveSpinner(true);
 
-    ///Save Data Api
     let query = queryString.parse(this.props.location.search);
     let entity = {
       Id: query.id
@@ -162,86 +145,16 @@ class EditProducts extends Component {
                     {this.props.majorentity.fields
                       .filter(field => field.EntityAreaId == area.Id)
                       .map(field => {
-                        if (
-                          field.EntityFieldType == EntityFieldTypes.Text ||
-                          field.EntityFieldType == EntityFieldTypes.Number
-                        ) {
-                          return (
-                            <div
-                              key={field.Id}
-                              className="col-lg-3 col-md-6 col-sm-12"
-                            >
-                              <div className="form-group">
-                                <label htmlFor={field.FieldName}>
-                                  {field.FieldName}
-                                </label>
-                                <input
-                                  type={
-                                    field.EntityFieldType ==
-                                    EntityFieldTypes.Text
-                                      ? "text"
-                                      : "number"
-                                  }
-                                  className={`form-control ${
-                                    RandomStyles.inputfield
-                                  }`}
-                                  id={field.FieldName}
-                                  value={
-                                    this.props.majorentity.entityData[
-                                      field.Accessor
-                                    ] != undefined
-                                      ? this.props.majorentity.entityData[
-                                          field.Accessor
-                                        ]
-                                      : ""
-                                  }
-                                  name={field.Accessor}
-                                  onChange={event =>
-                                    this.props.entityFieldsOnChange(
-                                      event.target.name,
-                                      event.target.value
-                                    )
-                                  }
-                                />
-                              </div>
-                            </div>
-                          );
-                        } else if (
-                          field.EntityFieldType == EntityFieldTypes.TextArea
-                        ) {
-                          return (
-                            <div key={field.Id} className="col-12">
-                              <div className="form-group">
-                                <label htmlFor={field.FieldName}>
-                                  {field.FieldName}
-                                </label>
-                                <textarea
-                                  className={`form-control ${
-                                    RandomStyles.inputfield
-                                  }`}
-                                  rows="3"
-                                  id={field.FieldName}
-                                  value={
-                                    this.props.majorentity.entityData[
-                                      field.Accessor
-                                    ] != undefined
-                                      ? this.props.majorentity.entityData[
-                                          field.Accessor
-                                        ]
-                                      : ""
-                                  }
-                                  name={field.Accessor}
-                                  onChange={event =>
-                                    this.props.entityFieldsOnChange(
-                                      event.target.name,
-                                      event.target.value
-                                    )
-                                  }
-                                />
-                              </div>
-                            </div>
-                          );
-                        }
+                        return (
+                          <CustomFields
+                            key={field.id}
+                            Field={field}
+                            Majorentity={this.props.majorentity}
+                            EntityFieldsOnChange={
+                              this.props.entityFieldsOnChange
+                            }
+                          />
+                        );
                       })}
                   </div>
                 </div>
