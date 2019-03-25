@@ -11,7 +11,6 @@ import "react-toastify/dist/ReactToastify.css";
 
 import BoxStyles from "../../../../utilities/css/Box.less";
 import RandomStyles from "../../../../utilities/css/Random.less";
-import EditProductsStyles from "./EditProducts.less";
 import ViewsService from "../../../../services/Views";
 import ProductsService from "../../../../services/Products";
 import EntityTypes from "../../../../enums/EntityTypes";
@@ -164,7 +163,7 @@ class EditProducts extends Component {
           <div className="col-12">
             <div className={BoxStyles.box}>
               <div className={BoxStyles["box-body"]}>
-                <div className={`float-right ${EditProductsStyles["footer"]}`}>
+                <div className={`float-right ${RandomStyles["footer"]}`}>
                   <Button
                     className={`btn ${RandomStyles["primary-button"]}`}
                     onClick={() => this.saveEntityData()}
