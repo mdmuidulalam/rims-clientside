@@ -78,7 +78,7 @@ class EditCustomers extends Component {
 
   getEntityData() {
     let query = queryString.parse(this.props.location.search);
-    this.customersService.getCustomers(query.id).then(response => {
+    this.customersService.getCustomer(query.id).then(response => {
       if (response.data.success) {
         for (let field in response.data.entity[0]) {
           this.props.entityFieldsOnChange(
