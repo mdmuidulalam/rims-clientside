@@ -6,7 +6,6 @@ import { connect } from "react-redux";
 import { instanceOf } from "prop-types";
 import { withCookies, Cookies } from "react-cookie";
 import { withRouter } from "react-router-dom";
-import Promise from "bluebird";
 import renderHTML from "react-render-html";
 
 import GridStyles from "../../utilities/css/Grid.css";
@@ -73,15 +72,7 @@ class CustomGrid extends Component {
 
   /// Column Options
 
-  closeColumnOptionsModal() {
-    this.props.changeShowColumnOptionsModal(false);
-  }
-
-  openColumnOptionsModal() {
-    this.props.changeShowColumnOptionsModal(true);
-  }
-
-  okColumnOptionsModal() {
+  updateColumnOptionsModal() {
     const { cookies } = this.props;
 
     this.props.changeColumns(this.props.columns);
@@ -91,7 +82,7 @@ class CustomGrid extends Component {
       path: "/home"
     });
 
-    this.closeColumnOptionsModal();
+    this.props.changeShowColumnOptionsModal(false);
   }
 
   /// End Column Options
@@ -100,26 +91,8 @@ class CustomGrid extends Component {
   getInitColumns() {
     const { cookies } = this.props;
 
-    new Promise((resolve, reject) => {
-      let allColumns = cookies.get("allColumns");
-      if (allColumns == undefined) {
-        resolve(
-          this.viewsService.getDataGridColumns().then(response => {
-            response.data.entity.map(col => {
-              col.accessor = col.Accessor;
-              delete col.Accessor;
-              return col;
-            });
-            cookies.set("allColumns", response.data.entity, {
-              path: "/home"
-            });
-            return response.data.entity;
-          })
-        );
-      } else {
-        resolve(allColumns);
-      }
-    })
+    this.viewsService
+      .getDataGridColumns(cookies)
       .then(allColumns => {
         let allGridColumns = allColumns.filter(col => {
           if (col.GridType == this.props.GridType) return col;
@@ -186,7 +159,9 @@ class CustomGrid extends Component {
                 <div className="col-12 text-right">
                   <span
                     className={RandomStyles["columnoptions"]}
-                    onClick={() => this.openColumnOptionsModal()}
+                    onClick={() =>
+                      this.props.changeShowColumnOptionsModal(true)
+                    }
                   >
                     <i className="fas fa-wrench" /> Column options
                   </span>
@@ -201,29 +176,12 @@ class CustomGrid extends Component {
                     className="-striped -highlight"
                     getTdProps={(state, rowInfo, column, instance) => {
                       return {
-                        onClick: (e, handleOriginal) => {
-                          console.log("A Td Element was clicked!");
-                          console.log("it produced this event:", e);
-                          console.log("It was in this column:", column);
-                          console.log("It was in this row:", rowInfo);
-                          console.log(
-                            "It was in this table instance:",
-                            instance
-                          );
+                        onClick: () => {
                           this.props.history.push(
                             `${this.props.match.path}/edit?id=${
                               rowInfo.original.id
                             }`
                           );
-
-                          // IMPORTANT! React-Table uses onClick internally to trigger
-                          // events like expanding SubComponents and pivots.
-                          // By default a custom 'onClick' handler will override this functionality.
-                          // If you want to fire the original onClick handler, call the
-                          // 'handleOriginal' function.
-                          // if (handleOriginal) {
-                          //   handleOriginal();
-                          // }
                         }
                       };
                     }}
@@ -291,7 +249,7 @@ class CustomGrid extends Component {
                       className={
                         "btn " + CustomGridStyles["ok-button-column-options"]
                       }
-                      onClick={() => this.okColumnOptionsModal()}
+                      onClick={() => this.updateColumnOptionsModal()}
                     >
                       OK
                     </Button>
@@ -300,7 +258,9 @@ class CustomGrid extends Component {
                         "btn btn-light " +
                         CustomGridStyles["cancel-button-column-options"]
                       }
-                      onClick={() => this.closeColumnOptionsModal()}
+                      onClick={() =>
+                        this.props.changeShowColumnOptionsModal(false)
+                      }
                     >
                       Cancel
                     </Button>
