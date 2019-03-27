@@ -8,6 +8,7 @@ import Dashboard from "./dashboard/Dashboard.jsx";
 import Orders from "./orders/Orders.jsx";
 import Purchases from "./purchases/Purchases.jsx";
 import Vendors from "./vendors/Vendors.jsx";
+import Accountings from "./accounting/Accountings.jsx";
 
 export default class Home extends Component {
   constructor(props) {
@@ -86,6 +87,15 @@ export default class Home extends Component {
                 <i className="fas fa-user-tie" /> Vendors
               </li>
             </NavLink>
+            <NavLink
+              to={`${this.props.match.path}/accounting`}
+              className={Styles.menunavlink}
+              activeClassName={Styles.menuactive}
+            >
+              <li className={Styles.menulineitem}>
+                <i className="fas fa-balance-scale" /> Transactions
+              </li>
+            </NavLink>
           </ul>
         </div>
         {/* header content */}
@@ -133,6 +143,10 @@ export default class Home extends Component {
             <Route
               path={`${this.props.match.path}/vendors`}
               component={Vendors}
+            />
+            <Route
+              path={`${this.props.match.path}/accounting`}
+              component={Accountings}
             />
           </div>
         </div>
