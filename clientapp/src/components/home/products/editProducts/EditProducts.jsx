@@ -69,9 +69,13 @@ class EditProducts extends Component {
 
       let areaIds = allAreas.map(area => area.Id);
 
-      let allFields = allAreasAndFields.fields.filter(field =>
-        areaIds.includes(field.EntityAreaId)
-      );
+      let allFields = allAreasAndFields.fields
+        .filter(field => areaIds.includes(field.EntityAreaId))
+        .sort((a, b) =>
+          a.SortOrder > b.SortOrder ? 1 : b.SortOrder > a.SortOrder ? -1 : 0
+        );
+
+      console.log(allFields);
       this.props.updateFields(allFields);
     });
   }

@@ -17,10 +17,8 @@ import {
 const mapStateToProps = state => ({ ...state.login });
 
 const mapDispatchToProps = dispatch => ({
-  onChangeEmail: payload =>
-    dispatch({ type: LOG_IN_UPDATE_FIELD, key: "email", payload }),
-  onChangePassword: payload =>
-    dispatch({ type: LOG_IN_UPDATE_FIELD, key: "password", payload }),
+  onChange: payload =>
+    dispatch({ type: LOG_IN_UPDATE_FIELD, key: key, payload: payload }),
   onChangeShowValidationError: payload =>
     dispatch({
       type: LOG_IN_UPDATE_FIELD,
@@ -98,7 +96,9 @@ class LoginForm extends Component {
               <input
                 className={Styles.logininput}
                 value={this.props.email}
-                onChange={event => this.props.onChangeEmail(event.target.value)}
+                onChange={event =>
+                  this.props.onChange(event.target.name, event.target.value)
+                }
                 type="text"
                 name="email"
                 id="name"
@@ -113,7 +113,7 @@ class LoginForm extends Component {
                 className={Styles.logininput}
                 value={this.props.password}
                 onChange={event =>
-                  this.props.onChangePassword(event.target.value)
+                  this.props.onChange(event.target.name, event.target.value)
                 }
                 type="password"
                 name="password"
