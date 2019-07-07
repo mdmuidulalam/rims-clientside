@@ -1,0 +1,52 @@
+@maincolor: #00a65a;
+@secondcolor: #222d32;
+@backcolor: white;
+@textfont: "Roboto", sans-serif;
+
+/// Grid Column options css
+.columnoptions {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 7px;
+  &:hover {
+    background-color: darken(@backcolor, 25%);
+  }
+}
+
+/// Row gap
+.top-buffer {
+  margin-top: 10px;
+}
+
+/// Input field css
+.inputfield:focus {
+  border-color: @maincolor !important;
+  box-shadow: 0 0 0 0.03rem @maincolor !important;
+}
+
+///Primary button
+.primary-button {
+  background-color: @maincolor !important;
+  border: @maincolor !important;
+  &:hover {
+    background-color: darken(@maincolor, 10%) !important;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.1rem lighten(@maincolor, 7%) !important;
+  }
+}
+
+.secondary-button {
+  background-color: darken(@backcolor, 10%) !important;
+  &:hover {
+    background-color: darken(@backcolor, 20%) !important;
+  }
+  &:focus {
+    box-shadow: 0 0 0 0.1rem lighten(@backcolor, 10%) !important;
+  }
+}
+
+///Entity edit footer
+.footer > :not(:last-child) {
+  margin-right: 10px !important;
+}
