@@ -17,7 +17,7 @@ import {
 const mapStateToProps = state => ({ ...state.login });
 
 const mapDispatchToProps = dispatch => ({
-  onChange: payload =>
+  onChange: (key,payload) =>
     dispatch({ type: LOG_IN_UPDATE_FIELD, key: key, payload: payload }),
   onChangeShowValidationError: payload =>
     dispatch({
@@ -55,29 +55,29 @@ class LoginForm extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    const { cookies } = this.props;
-
+    this.props.onChangeShowValidationError(false);
     this.authService
       .login(this.props.email, this.props.password)
       .then(response => {
-        if (response.data.success) {
-          cookies.set("jwtToken", response.data.entity, { path: "/" });
+        if (response.status == 200) {
           this.props.history.push("/home/dashboard");
-        } else {
-          throw "invalid credentials";
+        } else if (response.status == 260) {
+          this.props.onChangeShowValidationError(true);
+          this.props.onChangeValidationErrorMessage(
+            "Sorry, we <strong>couldn't find an account</strong> with this username."
+          );
+        } else if (response.status == 261) {
+          this.props.onChangeShowValidationError(true);
+          this.props.onChangeValidationErrorMessage(
+            "You have entered a <strong>wrong password.</strong>"
+          );
         }
       })
       .catch(error => {
         this.props.onChangeShowValidationError(true);
-        if (error === "invalid credentials") {
-          this.props.onChangeValidationErrorMessage(
-            "You have entered an <strong>invalid email or password</strong>"
-          );
-        } else {
-          this.props.onChangeValidationErrorMessage(
-            "Service isn't availabe. <strong>Please, contact customer support</strong>"
-          );
-        }
+        this.props.onChangeValidationErrorMessage(
+          "Service isn't availabe. <strong>Please, contact customer support.</strong>"
+        );
       });
   }
 

@@ -73,14 +73,10 @@ class CustomGrid extends Component {
   /// Column Options
 
   updateColumnOptionsModal() {
-    const { cookies } = this.props;
-
     this.props.changeColumns(this.props.columns);
-    let columns = cookies.get("columns");
+    let columns = JSON.parse(localStorage.getItem('columns'));
     columns[this.props.GridType.toString()] = this.props.columns;
-    cookies.set("columns", columns, {
-      path: "/home"
-    });
+    localStorage.setItem('columns', JSON.stringify(columns));
 
     this.props.changeShowColumnOptionsModal(false);
   }
@@ -89,10 +85,8 @@ class CustomGrid extends Component {
 
   /// Get Grid Columns
   getInitColumns() {
-    const { cookies } = this.props;
-
     this.viewsService
-      .getDataGridColumns(cookies)
+      .getDataGridColumns()
       .then(allColumns => {
         let allGridColumns = allColumns.filter(col => {
           if (col.GridType == this.props.GridType) return col;
@@ -104,7 +98,8 @@ class CustomGrid extends Component {
         return allGridColumns;
       })
       .then(allGridColumns => {
-        let columns = cookies.get("columns");
+        let columns = JSON.parse(localStorage.getItem('columns'));
+        
         let gridColumns;
         if (
           columns == undefined ||
@@ -116,9 +111,7 @@ class CustomGrid extends Component {
             columns = {};
           }
           columns[this.props.GridType.toString()] = gridColumns;
-          cookies.set("columns", columns, {
-            path: "/home"
-          });
+          localStorage.setItem('columns', JSON.stringify(columns));
         } else {
           gridColumns = columns[this.props.GridType.toString()];
         }

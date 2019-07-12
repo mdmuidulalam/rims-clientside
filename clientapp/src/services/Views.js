@@ -1,11 +1,10 @@
 import axios from "axios";
 import Promise from "bluebird";
-import { resolve, reject } from "q";
 
 export default class ViewsService {
-  getDataGridColumns(cookies) {
+  getDataGridColumns() {
     return new Promise((resolve, reject) => {
-      let allColumns = cookies.get("allColumns");
+      let allColumns = JSON.parse(localStorage.getItem('allColumns'));
       if (allColumns == undefined) {
         resolve(
           axios.get("/api/clientViews/getDataGridColumns").then(response => {
@@ -14,9 +13,7 @@ export default class ViewsService {
               delete col.Accessor;
               return col;
             });
-            cookies.set("allColumns", response.data.entity, {
-              path: "/home"
-            });
+            localStorage.setItem('allColumns', JSON.stringify(response.data.entity));
             return response.data.entity;
           })
         );
@@ -26,17 +23,15 @@ export default class ViewsService {
     });
   }
 
-  getEntityAreas(cookies) {
+  getEntityAreas() {
     return new Promise((resolve, reject) => {
-      let allAreasAndFields = cookies.get("allAreasAndFields");
+      let allAreasAndFields = JSON.parse(localStorage.getItem('allAreasAndFields'));
       if (allAreasAndFields == undefined) {
         resolve(
           axios
             .get("/api/clientViews/getEntityAreasAndFields")
             .then(response => {
-              cookies.set("allAreasAndFields", response.data.entity, {
-                path: "/home"
-              });
+              localStorage.setItem('allAreasAndFields', JSON.stringify(response.data.entity));
               return response.data.entity;
             })
         );
