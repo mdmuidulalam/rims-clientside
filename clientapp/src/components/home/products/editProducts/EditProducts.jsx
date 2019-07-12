@@ -60,8 +60,7 @@ class EditProducts extends Component {
   /// End OverRide Functions
 
   getAreasAndFeilds() {
-    const { cookies } = this.props;
-    return this.viewsService.getEntityAreas(cookies).then(allAreasAndFields => {
+    return this.viewsService.getEntityAreas().then(allAreasAndFields => {
       let allAreas = allAreasAndFields.areas.filter(
         area => area.EntityTypes == EntityTypes.Product
       );

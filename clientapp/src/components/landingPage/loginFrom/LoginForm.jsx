@@ -17,7 +17,7 @@ import {
 const mapStateToProps = state => ({ ...state.login });
 
 const mapDispatchToProps = dispatch => ({
-  onChange: payload =>
+  onChange: (key,payload) =>
     dispatch({ type: LOG_IN_UPDATE_FIELD, key: key, payload: payload }),
   onChangeShowValidationError: payload =>
     dispatch({
