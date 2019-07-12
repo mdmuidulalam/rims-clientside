@@ -74,7 +74,6 @@ class EditProducts extends Component {
           a.SortOrder > b.SortOrder ? 1 : b.SortOrder > a.SortOrder ? -1 : 0
         );
 
-      console.log(allFields);
       this.props.updateFields(allFields);
     });
   }
